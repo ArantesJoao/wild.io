@@ -14,7 +14,7 @@ export const Title = styled.Text`
   margin-top: 7px;
 
   font-family: ${theme.font_family.title};
-  font-size: ${theme.font_size.title};
+  font-size: ${theme.font_size.title}px;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;

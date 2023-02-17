@@ -20,15 +20,15 @@ export const theme = {
   },
 
   font_family: {
-    title: "Volkhov_400Regular",
-
     regular: "Montserrat_500Medium",
+
+    title: "Volkhov_400Regular",
   },
 
   font_size: {
     sm: 14,
-    md: 16,
-    lg: 24,
+    md: 18,
+    lg: 32,
     title: 48,
   },
 };
