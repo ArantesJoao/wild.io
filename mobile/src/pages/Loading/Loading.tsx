@@ -1,8 +1,8 @@
 import { ActivityIndicator } from "react-native";
-import { Container, Logo, Title } from "./styles";
+import { Container, Logo, Title } from "./style";
 import { theme } from "../../theme";
 
-import logoPath from "../../assets/logo.png";
+import logoPath from "../../assets/icon.png";
 
 export function Loading() {
   return (

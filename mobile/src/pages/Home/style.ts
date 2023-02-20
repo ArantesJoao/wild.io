@@ -20,36 +20,21 @@ export const Content = styled.View`
   margin-top: 6px;
 `;
 
+export const ButtonSection = styled.View`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 29px;
+`;
+
 export const Title = styled.Text`
-  font-size: ${theme.font_size.lg}px;
+  font-size: 32px;
   font-family: ${theme.font_family.regular};
 `;
 
 export const Map = styled.Image`
   width: 345px;
   height: 165px;
-`;
-
-export const Button = styled.TouchableOpacity`
-  width: 165px;
-  height: 165px;
-
-  border-radius: 30;
-
-  background-color: ${theme.colors.surface_button};
-`;
-
-export const ButtonTitle = styled.Text`
-  color: ${theme.colors.text_button};
-  font-family: ${theme.font_family.regular};
-  font-size: ${theme.font_size.md}px;
-
-  padding: 0px 16.5px;
-`;
-
-export const ButtonIcon = styled.Image`
-  height: 48px;
-  width: 48px;
-
-  margin: 11px 0px 0px 8px;
 `;

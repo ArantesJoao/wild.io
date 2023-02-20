@@ -24,11 +24,4 @@ export const theme = {
 
     title: "Volkhov_400Regular",
   },
-
-  font_size: {
-    sm: 14,
-    md: 18,
-    lg: 32,
-    title: 48,
-  },
 };
