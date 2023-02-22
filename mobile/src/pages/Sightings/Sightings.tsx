@@ -1,21 +1,21 @@
 import React from "react";
-import { BackIcon, BackIconText, Container, Icon, Map } from "./style";
+import { Container, Map } from "./style";
+import { BackButton } from "../../components/BackButton";
+import { useNavigation, ParamListBase } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import map from "../../assets/map.png";
-import icon from "../../assets/icon.png";
-import { SafeAreaView, View } from "react-native";
+import { AddSighting } from "../../components/AddSighting";
 
 export function Sightings() {
+  const { navigate } =
+    useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   return (
-    // TODO: Make top SafeAreaView transparent
-    <SafeAreaView>
-      <Container>
-        <Map source={map} />
-        <BackIcon>
-          <Icon source={icon} />
-          <BackIconText>Voltar</BackIconText>
-        </BackIcon>
-      </Container>
-    </SafeAreaView>
+    <Container>
+      <Map source={map} />
+      <AddSighting />
+      <BackButton onPress={() => navigate("home")} />
+    </Container>
   );
 }
