@@ -1,6 +1,10 @@
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 
+export const SafeView = styled.SafeAreaView`
+  background-color: ${theme.colors.background};
+`;
+
 export const Container = styled.View`
   display: flex;
   align-content: center;

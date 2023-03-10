@@ -1,9 +1,15 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 
 import { MainMenuButton } from "../../components/MainMenuButton";
-import { Container, Title, Map, Content, ButtonSection } from "./style";
+import {
+  Container,
+  Title,
+  Map,
+  Content,
+  ButtonSection,
+  SafeView,
+} from "./style";
 
 import map from "../../assets/sample_map.png";
 import parksIcon from "../../assets/parks.png";
@@ -15,7 +21,7 @@ export function Home() {
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   return (
-    <SafeAreaView>
+    <SafeView>
       <Container>
         <Title>Olá, boa tarde!</Title>
         <Content>
@@ -29,10 +35,11 @@ export function Home() {
             <MainMenuButton
               name="Visualizar parques mais próximos"
               icon={parksIcon}
+              onPress={() => navigate("nearest_parks")}
             />
           </ButtonSection>
         </Content>
       </Container>
-    </SafeAreaView>
+    </SafeView>
   );
 }

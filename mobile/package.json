@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.2.2",
-    "@expo-google-fonts/volkhov": "^0.2.2",
     "@react-navigation/native": "^6.1.4",
     "@react-navigation/native-stack": "^6.9.10",
     "@types/styled-components": "^5.1.26",

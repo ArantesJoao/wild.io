@@ -20,8 +20,8 @@ export const theme = {
   },
 
   font_family: {
+    subtitle: "Montserrat_200ExtraLight",
     regular: "Montserrat_500Medium",
-
-    title: "Volkhov_400Regular",
+    title: "Montserrat_600SemiBold",
   },
 };

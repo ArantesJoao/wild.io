@@ -5,11 +5,19 @@ import { theme } from "./src/theme/index";
 import { Routes } from "./src/routes";
 import { Loading } from "./src/pages/Loading/Loading";
 
-import { useFonts, Montserrat_500Medium } from "@expo-google-fonts/montserrat";
-import { Volkhov_400Regular } from "@expo-google-fonts/volkhov";
+import {
+  useFonts,
+  Montserrat_200ExtraLight,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+} from "@expo-google-fonts/montserrat";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ Montserrat_500Medium, Volkhov_400Regular });
+  const [fontsLoaded] = useFonts({
+    Montserrat_200ExtraLight,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+  });
 
   if (!fontsLoaded) {
     return <Loading />;

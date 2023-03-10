@@ -7,9 +7,9 @@
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/icon.png",
+      "image": "./src/assets/splash_screen_logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FCFDF7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

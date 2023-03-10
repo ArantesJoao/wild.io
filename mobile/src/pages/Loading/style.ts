@@ -13,7 +13,6 @@ export const Title = styled.Text`
   margin-bottom: 300px;
   margin-top: 7px;
 
-  font-family: ${theme.font_family.title};
   font-size: 48px;
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
