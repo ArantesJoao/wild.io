@@ -1,4 +1,6 @@
 import styled from "styled-components/native";
+import MapView from "react-native-maps";
+
 import { theme } from "../../theme";
 
 export const SafeView = styled.SafeAreaView`
@@ -38,7 +40,9 @@ export const Title = styled.Text`
   font-family: ${theme.font_family.regular};
 `;
 
-export const Map = styled.Image`
-  width: 345px;
-  height: 165px;
+export const Map = styled(MapView)`
+  width: 100%;
+  height: 20%;
+
+  border-radius: 20px;
 `;

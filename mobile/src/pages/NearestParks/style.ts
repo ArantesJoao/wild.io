@@ -1,3 +1,4 @@
+import MapView, { Marker } from "react-native-maps";
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 
@@ -11,8 +12,11 @@ export const Content = styled.View`
   background-color: ${theme.colors.background};
 `;
 
-export const Map = styled.Image`
+export const Map = styled(MapView)`
   width: auto;
   height: 85%;
+
   border-radius: 30px;
 `;
+
+export const PinPoint = styled(Marker)``;
