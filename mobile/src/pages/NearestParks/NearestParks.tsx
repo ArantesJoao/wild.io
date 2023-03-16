@@ -6,13 +6,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { Container, Content, Map, PinPoint } from "./style";
-import { NearestParksButton } from "../../components/NearestParksButton";
 import { customMap } from "../../utils/mapStyle";
+import { NearestParksButton } from "../../components/NearestParksButton";
+import { Container, Content, Map, PinPoint, PinPointIcon } from "./style";
 
 let parks = [
   {
-    title: "Jardim Botânico de Flroianópolis",
+    title: "Jardim Botânico de Florianópolis",
     location: {
       latitude: -27.578936344230346,
       longitude: -48.5085277240508,
@@ -46,15 +46,16 @@ export function NearestParks() {
           coordinate={park.location}
           title={park.title}
           description={park.description}
-          icon={require("../../assets/park_marker.png")}
-        ></PinPoint>
+        >
+          <PinPointIcon source={require("../../assets/park_marker.png")} />
+        </PinPoint>
       );
     });
   };
 
   const [mapRegion, setMapRegion] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: -27.597664753388656,
+    longitude: -48.52063085134813,
     latitudeDelta: 0.1,
     longitudeDelta: 0.1,
   });
@@ -74,7 +75,6 @@ export function NearestParks() {
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     });
-    console.log(location.coords.latitude, location.coords.longitude);
   };
 
   useEffect(() => {

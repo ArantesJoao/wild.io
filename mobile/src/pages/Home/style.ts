@@ -1,5 +1,6 @@
-import styled from "styled-components/native";
 import MapView from "react-native-maps";
+import styled from "styled-components/native";
+import IconFontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { theme } from "../../theme";
 
@@ -38,6 +39,30 @@ export const ButtonSection = styled.View`
 export const Title = styled.Text`
   font-size: 32px;
   font-family: ${theme.font_family.regular};
+`;
+
+export const NoLocationContainer = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  background-color: ${theme.colors.warning_background};
+
+  padding: 10px;
+  margin-top: -45px;
+
+  border-radius: 5px;
+`;
+
+export const NoLocationText = styled.Text`
+  font-family: ${theme.font_family.regular};
+  color: ${theme.colors.warning_text};
+`;
+
+export const NoLocationAccessWarning = styled(IconFontAwesome)`
+  color: ${theme.colors.warning_text};
+  font-size: 16px;
+  margin-right: 7px;
 `;
 
 export const Map = styled(MapView)`

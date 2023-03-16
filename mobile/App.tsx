@@ -12,11 +12,15 @@ import {
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
 
+import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Montserrat_200ExtraLight,
     Montserrat_500Medium,
     Montserrat_600SemiBold,
+    Lato_400Regular,
+    Lato_700Bold,
   });
 
   if (!fontsLoaded) {

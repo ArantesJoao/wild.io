@@ -11,12 +11,19 @@ import {
   ButtonSection,
   SafeView,
   Map,
+  NoLocationAccessWarning,
+  NoLocationContainer,
+  NoLocationText,
 } from "./style";
 
 import { customMap } from "../../utils/mapStyle";
 import parksIcon from "../../assets/parks.png";
 import wildLifeIcon from "../../assets/wildlife.png";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Platform, Text } from "react-native";
+import NoLocationAccessModal from "../../components/NoLocationAccessModal";
+import { NoAccessIOSTemplate } from "../../components/NoAccessIOSTemplate";
+import { NoAccessAndroidTemplate } from "../../components/NoAccessAndroidTemplate";
 
 let mapStyle = customMap;
 
@@ -25,11 +32,14 @@ export function Home() {
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const [mapRegion, setMapRegion] = useState({
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0.9,
-    longitudeDelta: 0.04,
+    latitude: -27.597664753388656,
+    longitude: -48.52063085134813,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.05,
   });
+
+  const [noAccessModalVisible, setNoAccessModalVisible] = useState(false);
+
   const [errorMsg, setErrorMsg] = useState(String);
 
   const currentUserLocation = async () => {
@@ -46,12 +56,15 @@ export function Home() {
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     });
-    console.log(location.coords.latitude, location.coords.longitude);
   };
 
   useEffect(() => {
     currentUserLocation();
   }, []);
+
+  function AskLocalPermission() {
+    setNoAccessModalVisible(!noAccessModalVisible);
+  }
 
   return (
     <SafeView>
@@ -64,6 +77,33 @@ export function Home() {
             region={mapRegion}
             showsUserLocation={true}
           ></Map>
+          <NoLocationAccessModal
+            visible={noAccessModalVisible}
+            onClose={() => {
+              setNoAccessModalVisible(false);
+            }}
+          >
+            <>
+              {Platform.OS === "ios" ? (
+                <NoAccessIOSTemplate />
+              ) : (
+                <NoAccessAndroidTemplate />
+              )}
+            </>
+          </NoLocationAccessModal>
+          {errorMsg !== "" && (
+            <NoLocationContainer
+              onPress={() => {
+                AskLocalPermission();
+              }}
+              activeOpacity={0.7}
+            >
+              <NoLocationAccessWarning name="exclamation-triangle" />
+              <NoLocationText>
+                Acesso à localização não concedido
+              </NoLocationText>
+            </NoLocationContainer>
+          )}
           <ButtonSection>
             <MainMenuButton
               name="Registrar avistamento"

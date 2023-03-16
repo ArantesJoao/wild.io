@@ -3,7 +3,7 @@ import { theme } from "../../theme";
 
 export const Button = styled.TouchableOpacity`
   position: absolute;
-  justify-content: center;
+  padding-left: 12px;
   z-index: 1;
 
   box-shadow: 2px 3px rgba(0, 0, 0, 0.25);
