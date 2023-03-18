@@ -23,5 +23,5 @@ export const PinPoint = styled(Marker)``;
 
 export const PinPointIcon = styled.Image`
   width: 48px;
-  height: 59.94px;
+  height: 59.94px; // keep icon proportion
 `;

@@ -9,6 +9,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { customMap } from "../../utils/mapStyle";
 import { NearestParksButton } from "../../components/NearestParksButton";
 import { Container, Content, Map, PinPoint, PinPointIcon } from "./style";
+import { AddPark } from "../../components/AddPark";
 
 let parks = [
   {
@@ -93,8 +94,9 @@ export function NearestParks() {
         >
           {showParks()}
         </Map>
+        <AddPark />
+        <BackButton onPress={() => navigate("home")} />
       </Content>
-      <BackButton onPress={() => navigate("home")} />
     </Container>
   );
 }
