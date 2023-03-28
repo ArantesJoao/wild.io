@@ -9,7 +9,7 @@ import map from "../../assets/map.png";
 import { AddSighting } from "../../components/AddSighting";
 import { PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
-import AddSightingModal from "../../components/AddSightingModal";
+// import AddSightingModal from "../../components/AddSightingModal";
 
 let mapStyle = customMap;
 
@@ -68,14 +68,14 @@ export function Sightings() {
         }}
         activeOpacity={0.7}
       />
-      <AddSightingModal
+      {/* <AddSightingModal
         visible={sightingModalVisible}
         onClose={() => {
           setSightingModalVisible(false);
         }}
       >
         <></>
-      </AddSightingModal>
+      </AddSightingModal> */}
       <BackButton onPress={() => navigate("home")} />
     </Container>
   );
