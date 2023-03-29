@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal } from "react-native";
 import {
   ContentWrapper,
   ModalBackground,

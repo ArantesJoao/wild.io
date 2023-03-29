@@ -5,11 +5,9 @@ import { BackButton } from "../../components/BackButton";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import map from "../../assets/map.png";
 import { AddSighting } from "../../components/AddSighting";
 import { PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
-// import AddSightingModal from "../../components/AddSightingModal";
 
 let mapStyle = customMap;
 
@@ -54,8 +52,6 @@ export function Sightings() {
 
   return (
     <Container>
-      {/* <Map source={map} />
-       */}
       <Map
         provider={PROVIDER_GOOGLE}
         customMapStyle={mapStyle}
@@ -63,19 +59,9 @@ export function Sightings() {
         showsUserLocation={true}
       ></Map>
       <AddSighting
-        onPress={() => {
-          handleOpenAddSightingModal();
-        }}
+        onPress={() => navigate("register_sighting")}
         activeOpacity={0.7}
       />
-      {/* <AddSightingModal
-        visible={sightingModalVisible}
-        onClose={() => {
-          setSightingModalVisible(false);
-        }}
-      >
-        <></>
-      </AddSightingModal> */}
       <BackButton onPress={() => navigate("home")} />
     </Container>
   );
