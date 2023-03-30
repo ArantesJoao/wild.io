@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   background-color: ${theme.colors.logo};
   border-radius: 15px;
-  margin: 45px 0;
+  margin: 12px 0 40px;
   box-shadow: 2px 3px rgba(0, 0, 0, 0.25);
 `;
 

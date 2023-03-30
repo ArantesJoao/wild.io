@@ -8,7 +8,6 @@ export const Container = styled.TouchableOpacity`
   background-color: ${theme.colors.logo};
   border-radius: 15px;
 
-  position: absolute;
   width: 80%;
   margin: 0 10%;
   bottom: 170px

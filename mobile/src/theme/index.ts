@@ -15,12 +15,8 @@ export const theme = {
     logo: "#216C2E",
     loading_bar: "#005319",
 
-    // PRIMARY: "#8B5CF6",
-    // SUCCESS: "#34D399",
-    // ALERT: "#F87171",
-
-    // FOOTER: ["rgba(0,0,0,0)", "rgba(0,0,0,0.9)"],
-    // OVERLAY: "rgba(0,0,0,0.6)",
+    background_photo_button: "#E2E3DD",
+    photo_button_text: "#2F312D",
   },
 
   font_family: {
