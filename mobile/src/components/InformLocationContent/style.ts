@@ -6,7 +6,6 @@ const WINDOW_WIDTH = Dimensions.get("window").width;
 
 export const Content = styled.View`
   margin-bottom: 20px;
-  height: fit-content;
   width: ${WINDOW_WIDTH - 100}px;
 
   align-items: center;

@@ -9,36 +9,30 @@ import {
 } from "@react-navigation/native";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 
-import { Container } from "./style";
+import { Container, Content } from "./style";
 import { BackButton } from "../../components/BackButton";
-import { Form } from "../../components/AddSightingFormComponents/Form";
+import { RegisterEntityRouteParams } from "../RegisterSighting";
+import { Form } from "../../components/AddParkFormComponents/Form";
 
-export interface RegisterEntityRouteParams {
-  coordinates: LatLng;
-}
-
-type RegisterSightingScreenRouteProp = RouteProp<
-  ParamListBase & { register_sighting: RegisterEntityRouteParams },
-  "register_sighting"
+type RegisterParkScreenRouteProp = RouteProp<
+  ParamListBase & { register_park: RegisterEntityRouteParams },
+  "register_park"
 >;
 
-export function RegisterSighting() {
+export function RegisterPark() {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  const route = useRoute<RegisterSightingScreenRouteProp>();
+  const route = useRoute<RegisterParkScreenRouteProp>();
   const markerCoordinates = route.params?.coordinates;
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
-        <>
+        <Content>
           <Form coordinates={markerCoordinates} />
-        </>
-        <BackButton
-          style={{ height: "8%", marginLeft: "2%" }} // inline styled because this was a specific change for this screen
-          onPress={() => navigate("sightings")}
-        />
+        </Content>
+        <BackButton onPress={() => navigate("nearest_parks")} />
       </Container>
     </TouchableWithoutFeedback>
   );

@@ -94,7 +94,7 @@ export function NearestParks() {
         >
           {showParks()}
         </Map>
-        <AddPark />
+        <AddPark onPress={() => navigate("register_park")} />
         <BackButton onPress={() => navigate("home")} />
       </Content>
     </Container>

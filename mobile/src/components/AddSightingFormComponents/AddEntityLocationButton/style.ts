@@ -1,20 +1,14 @@
-import { Dimensions } from "react-native";
 import styled from "styled-components/native";
-import { theme } from "../../theme";
-
-const WINDOW_HEIGHT = Dimensions.get("window").height;
+import { theme } from "../../../theme";
 
 export const Container = styled.TouchableOpacity`
-  position: absolute;
+  flex-direction: row;
   padding: 22px 11px;
   align-items: center;
-  justify-content: center;
   background-color: ${theme.colors.logo};
   border-radius: 15px;
-
-  width: 80%;
-  margin: 0 10%;
-  top: ${WINDOW_HEIGHT - 230}px;
+  margin: 12px 0 40px;
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.25);
 `;
 
 export const Title = styled.Text`
@@ -22,4 +16,14 @@ export const Title = styled.Text`
   font-family: ${theme.font_family.lato_title};
 
   color: ${theme.colors.white_button_text};
+
+  width: 85%;
+  text-align: center;
+`;
+
+export const Icon = styled.Image`
+  width: 40px;
+  height: 40px;
+
+  margin-right: 10px;
 `;

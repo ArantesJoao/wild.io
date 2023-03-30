@@ -7,7 +7,7 @@ interface Props extends TouchableOpacityProps {
   title: string;
 }
 
-export function AddSightingLocationButton({ title, ...rest }: Props) {
+export function AddEntityLocationButton({ title, ...rest }: Props) {
   return (
     <Container {...rest}>
       <Icon source={locationIcon} />

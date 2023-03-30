@@ -4,7 +4,11 @@ import { theme } from "../../theme";
 
 import { Content, WarningText } from "./style";
 
-export function InformLocationContent() {
+interface InformLocationContentProps {
+  info: string;
+}
+
+export function InformLocationContent({ info }: InformLocationContentProps) {
   return (
     <Content>
       <Feather
@@ -12,7 +16,7 @@ export function InformLocationContent() {
         size={56}
         color={theme.colors.warning_text}
       />
-      <WarningText>Por favor informe o local do avistamento</WarningText>
+      <WarningText>{info}</WarningText>
     </Content>
   );
 }
