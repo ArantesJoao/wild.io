@@ -8,3 +8,5 @@ export const Container = styled.View`
   display: flex;
   flex-direction: column;
 `;
+
+export const CheckboxText = styled.Text``;

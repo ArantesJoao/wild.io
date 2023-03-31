@@ -14,15 +14,17 @@ import { DescriptionInputControl } from "../DescriptionInputControl";
 import InformLocationModal from "../../InformLocationModal";
 import { RegisterEntityRouteParams } from "../../../pages/RegisterSighting";
 
-import { Container } from "./style";
+import { CheckboxText, Container } from "./style";
 import { LatLng } from "react-native-maps";
 import { ImagePickerResult } from "expo-image-picker";
 import { InformLocationContent } from "../../InformLocationContent";
+import { CheckBox } from "react-native-elements";
 
 type FormData = {
   species: string;
   description: string;
   location: LatLng;
+  identifiedSpecies: boolean;
 };
 
 export interface RegisterData {
@@ -30,6 +32,7 @@ export interface RegisterData {
   description: string;
   location: LatLng;
   image: string;
+  identifiedSpecies: boolean;
 }
 
 const schema = yup.object({
@@ -42,6 +45,7 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const [image, setImage] = useState<string | null>(null);
+  const [identifiedSpecies, setIdentifiedSpecies] = useState(false);
 
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
@@ -76,9 +80,14 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      species: "",
+      description: "",
+    },
   });
 
   return (
@@ -92,11 +101,21 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         <InformLocationContent info="Por favor informe o local do avistamento!" />
       </InformLocationModal>
       <SightingImagePicker pickImage={handleImagePicker} />
+      <CheckBox
+        title="Espécie Identificada"
+        checked={identifiedSpecies}
+        onPress={() => {
+          setIdentifiedSpecies(!identifiedSpecies);
+          setValue("species", "");
+        }}
+      />
       <InputControl
         control={control}
         name="species"
         placeholder="Qual é a espécie?"
         error={errors.species}
+        editable={identifiedSpecies}
+        style={!identifiedSpecies ? {} : {}}
       />
       <DescriptionInputControl
         control={control}
