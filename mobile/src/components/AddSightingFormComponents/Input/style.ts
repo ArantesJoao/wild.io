@@ -2,7 +2,7 @@ import { TextInput } from "react-native";
 import styled from "styled-components/native";
 
 interface Props {
-  isFocused: boolean;
+  isActive: boolean;
 }
 
 export const Container = styled.View`
@@ -16,4 +16,6 @@ export const InputText = styled(TextInput)<Props>`
   border: 1px #79747e;
   border-radius: 7px;
   padding: 0 23px;
+
+  background: ${({ isActive }: Props) => (isActive ? "red" : "blue")};
 `;

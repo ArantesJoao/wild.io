@@ -115,7 +115,7 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         placeholder="Qual é a espécie?"
         error={errors.species}
         editable={identifiedSpecies}
-        style={!identifiedSpecies ? {} : {}}
+        isActive={identifiedSpecies}
       />
       <DescriptionInputControl
         control={control}

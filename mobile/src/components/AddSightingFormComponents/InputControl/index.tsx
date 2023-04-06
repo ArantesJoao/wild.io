@@ -7,6 +7,7 @@ import { Input, InputProps } from "../Input";
 type RegularInputProps = InputProps & {
   control: Control<any>;
   name: string;
+  isActive: boolean;
   error?: FieldError;
 };
 
@@ -14,6 +15,7 @@ export function InputControl({
   control,
   name,
   error,
+  isActive,
   ...rest
 }: RegularInputProps) {
   return (
@@ -22,7 +24,12 @@ export function InputControl({
         name={name}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} {...rest} />
+          <Input
+            isActive={isActive}
+            onChangeText={onChange}
+            value={value}
+            {...rest}
+          />
         )}
       />
 
