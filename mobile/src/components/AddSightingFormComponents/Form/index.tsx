@@ -14,11 +14,17 @@ import { DescriptionInputControl } from "../DescriptionInputControl";
 import InformLocationModal from "../../InformLocationModal";
 import { RegisterEntityRouteParams } from "../../../pages/RegisterSighting";
 
-import { CheckboxText, Container } from "./style";
+import {
+  CheckboxContainer,
+  CheckboxText,
+  Container,
+  FirstRowContainer,
+} from "./style";
 import { LatLng } from "react-native-maps";
 import { ImagePickerResult } from "expo-image-picker";
 import { InformLocationContent } from "../../InformLocationContent";
 import { CheckBox } from "react-native-elements";
+import { CustomCheckBox } from "../CustomCheckbox";
 
 type FormData = {
   species: string;
@@ -101,22 +107,28 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         <InformLocationContent info="Por favor informe o local do avistamento!" />
       </InformLocationModal>
       <SightingImagePicker pickImage={handleImagePicker} />
-      <CheckBox
-        title="Espécie Identificada"
-        checked={identifiedSpecies}
-        onPress={() => {
-          setIdentifiedSpecies(!identifiedSpecies);
-          setValue("species", "");
-        }}
-      />
-      <InputControl
-        control={control}
-        name="species"
-        placeholder="Qual é a espécie?"
-        error={errors.species}
-        editable={identifiedSpecies}
-        isActive={identifiedSpecies}
-      />
+      <FirstRowContainer>
+        <CheckboxContainer>
+          <CheckBox
+            checked={identifiedSpecies}
+            onPress={() => {
+              setIdentifiedSpecies(!identifiedSpecies);
+              setValue("species", "");
+            }}
+            checkedIcon={<CustomCheckBox checked />}
+            uncheckedIcon={<CustomCheckBox checked={false} />}
+          />
+          <CheckboxText>Espécie identificada</CheckboxText>
+        </CheckboxContainer>
+        <InputControl
+          control={control}
+          name="species"
+          placeholder="Qual é a espécie?"
+          error={errors.species}
+          editable={identifiedSpecies}
+          isActive={identifiedSpecies}
+        />
+      </FirstRowContainer>
       <DescriptionInputControl
         control={control}
         name="description"
