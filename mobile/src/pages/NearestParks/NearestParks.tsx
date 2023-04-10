@@ -7,7 +7,6 @@ import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { customMap } from "../../utils/mapStyle";
-import { NearestParksButton } from "../../components/NearestParksButton";
 import { Container, Content, Map, PinPoint, PinPointIcon } from "./style";
 import { AddPark } from "../../components/AddPark";
 
@@ -85,7 +84,6 @@ export function NearestParks() {
   return (
     <Container>
       <Content>
-        <NearestParksButton style={{ paddingTop: insets.top }} />
         <Map
           provider={PROVIDER_GOOGLE}
           customMapStyle={mapStyle}

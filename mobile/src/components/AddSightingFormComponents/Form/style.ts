@@ -11,11 +11,13 @@ export const Container = styled.View`
 `;
 
 export const CheckboxText = styled.Text`
-  font-family: ${theme.font_family.lato_regular}
-  color: #49454F;
+  font-family: ${theme.font_family.lato_regular};
+  color: #49454f;
 
   text-align: center;
-  line-height: 13px
+  line-height: 13px;
+
+  margin-top: 7px;
 `;
 
 export const CheckboxContainer = styled.View`
@@ -28,4 +30,14 @@ export const CheckboxContainer = styled.View`
 
 export const FirstRowContainer = styled.View`
   flex-direction: row;
+  margin-bottom: 15px;
+`;
+
+export const InputAndInputError = styled.View`
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const SpeciesError = styled.Text`
+  margin-bottom: 0px;
 `;

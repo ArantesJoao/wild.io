@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -19,6 +19,8 @@ import {
   CheckboxText,
   Container,
   FirstRowContainer,
+  InputAndInputError,
+  SpeciesError,
 } from "./style";
 import { LatLng } from "react-native-maps";
 import { ImagePickerResult } from "expo-image-picker";
@@ -33,6 +35,10 @@ type FormData = {
   identifiedSpecies: boolean;
 };
 
+interface FormStates {
+  identifiedSpecies: boolean;
+}
+
 export interface RegisterData {
   species: string;
   description: string;
@@ -41,10 +47,17 @@ export interface RegisterData {
   identifiedSpecies: boolean;
 }
 
-const schema = yup.object({
-  species: yup.string().required("A espécie é obrigatória"),
-  description: yup.string().required("A descrição é obrigatória"),
-});
+const getSchema = (identifiedSpecies: boolean) =>
+  yup.object({
+    species: yup
+      .string()
+      .test(
+        "identifiedSpecies",
+        "A espécie é obrigatória",
+        (value) => !identifiedSpecies || Boolean(value && value.length > 0)
+      ),
+    description: yup.string().required("A descrição é obrigatória"),
+  });
 
 export function Form({ coordinates }: RegisterEntityRouteParams) {
   const { navigate } =
@@ -57,19 +70,32 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
     useState(false);
 
   function handleSubmitSighting(data: FormData) {
-    console.log(coordinates);
     if (coordinates == undefined) {
       setInformLocationModalVisible(true);
       return;
     }
 
+    if (data.identifiedSpecies && data.species == "") {
+      return;
+    }
+
     let sighting = {} as RegisterData;
-    sighting.species = data.species;
+
+    sighting.identifiedSpecies = identifiedSpecies;
+
+    if (identifiedSpecies) {
+      sighting.species = data.species;
+    } else {
+      sighting.species = "";
+    }
+
     sighting.description = data.description;
+
     sighting.location = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     };
+
     sighting.image = image as string;
 
     console.log(sighting);
@@ -88,13 +114,26 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
     handleSubmit,
     setValue,
     formState: { errors },
+    setError,
+    clearErrors,
+    watch,
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(getSchema(identifiedSpecies)),
     defaultValues: {
       species: "",
       description: "",
     },
   });
+
+  const speciesValue = watch("species");
+
+  useEffect(() => {
+    if (identifiedSpecies && (!speciesValue || speciesValue.length === 0)) {
+      setError("species", { message: "A espécie é obrigatória" });
+    } else {
+      clearErrors("species");
+    }
+  }, [identifiedSpecies, setError, clearErrors, speciesValue]);
 
   return (
     <Container>
@@ -120,14 +159,16 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
           />
           <CheckboxText>Espécie identificada</CheckboxText>
         </CheckboxContainer>
-        <InputControl
-          control={control}
-          name="species"
-          placeholder="Qual é a espécie?"
-          error={errors.species}
-          editable={identifiedSpecies}
-          isActive={identifiedSpecies}
-        />
+        <InputAndInputError>
+          <InputControl
+            control={control}
+            name="species"
+            placeholder="Qual é a espécie?"
+            error={errors.species}
+            editable={identifiedSpecies}
+            isActive={identifiedSpecies}
+          />
+        </InputAndInputError>
       </FirstRowContainer>
       <DescriptionInputControl
         control={control}
