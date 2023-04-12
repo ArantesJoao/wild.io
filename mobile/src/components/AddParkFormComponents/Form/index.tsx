@@ -16,21 +16,17 @@ import { RegisterEntityRouteParams } from "../../../pages/RegisterSighting";
 import { Container } from "./style";
 import { LatLng } from "react-native-maps";
 import { InformLocationContent } from "../../InformLocationContent";
+import useParks, { Park } from "../../../hooks/useParks";
+import { LoadingBar } from "../../AddSightingFormComponents/Form/style";
 
 type FormData = {
-  species: string;
+  name: string;
   description: string;
   location: LatLng;
 };
 
-interface ParkRegisterData {
-  name: string;
-  description: string;
-  location: LatLng;
-}
-
 const schema = yup.object({
-  species: yup.string().required("O nome do parque é obrigatório"),
+  name: yup.string().required("O nome do parque é obrigatório"),
   description: yup
     .string()
     .required("Informe pelo menos o bairro onde fica o parque!"),
@@ -40,25 +36,27 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
+  const { savePark, loading, error } = useParks();
+
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
 
-  function handleSubmitPark(data: FormData) {
+  async function handleSubmitPark(data: FormData) {
     console.log(coordinates);
     if (coordinates == undefined) {
       setInformLocationModalVisible(true);
       return;
     }
 
-    let park = {} as ParkRegisterData;
-    park.name = data.species;
+    let park = {} as Park;
+    park.name = data.name;
     park.description = data.description;
     park.location = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     };
 
-    console.log(park);
+    await savePark(park);
     navigate("nearest_parks");
   }
 
@@ -82,9 +80,9 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
       </InformLocationModal>
       <InputControl
         control={control}
-        name="species"
+        name="name"
         placeholder="Qual o nome oficial do parque?"
-        error={errors.species}
+        error={errors.name}
       />
       <DescriptionInputControl
         control={control}
@@ -106,6 +104,8 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         onPress={handleSubmit(handleSubmitPark)}
         activeOpacity={0.7}
       />
+
+      {loading && <LoadingBar color="#216C2E" />}
     </Container>
   );
 }

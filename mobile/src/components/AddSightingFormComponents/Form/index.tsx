@@ -1,17 +1,21 @@
 import * as yup from "yup";
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { LatLng } from "react-native-maps";
+import { CheckBox } from "react-native-elements";
+import React, { useEffect, useState } from "react";
+import { ImagePickerResult } from "expo-image-picker";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { ParamListBase, useNavigation } from "@react-navigation/native";
-import { AddEntityLocationButton } from "../AddEntityLocationButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { Submit } from "../Submit";
 import { InputControl } from "../InputControl";
 import SightingImagePicker from "../SightingPhoto";
-import { DescriptionInputControl } from "../DescriptionInputControl";
+import { CustomCheckBox } from "../CustomCheckbox";
 import InformLocationModal from "../../InformLocationModal";
+import { DescriptionInputControl } from "../DescriptionInputControl";
+import { InformLocationContent } from "../../InformLocationContent";
+import { AddEntityLocationButton } from "../AddEntityLocationButton";
 import { RegisterEntityRouteParams } from "../../../pages/RegisterSighting";
 
 import {
@@ -20,13 +24,10 @@ import {
   Container,
   FirstRowContainer,
   InputAndInputError,
-  SpeciesError,
+  LoadingBar,
 } from "./style";
-import { LatLng } from "react-native-maps";
-import { ImagePickerResult } from "expo-image-picker";
-import { InformLocationContent } from "../../InformLocationContent";
-import { CheckBox } from "react-native-elements";
-import { CustomCheckBox } from "../CustomCheckbox";
+
+import useSightings, { Sighting } from "../../../hooks/useSightings";
 
 type FormData = {
   species: string;
@@ -63,13 +64,14 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
+  const { saveSighting, loading, error } = useSightings();
   const [image, setImage] = useState<string | null>(null);
   const [identifiedSpecies, setIdentifiedSpecies] = useState(false);
 
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
 
-  function handleSubmitSighting(data: FormData) {
+  async function handleSubmitSighting(data: FormData) {
     if (coordinates == undefined) {
       setInformLocationModalVisible(true);
       return;
@@ -79,9 +81,9 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
       return;
     }
 
-    let sighting = {} as RegisterData;
+    let sighting = {} as Sighting;
 
-    sighting.identifiedSpecies = identifiedSpecies;
+    sighting.identified_species = identifiedSpecies;
 
     if (identifiedSpecies) {
       sighting.species = data.species;
@@ -96,9 +98,10 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
       longitude: coordinates.longitude,
     };
 
-    sighting.image = image as string;
+    sighting.photo = image as string;
+    sighting.date = new Date(Date.now());
 
-    console.log(sighting);
+    await saveSighting(sighting);
     navigate("sightings");
   }
 
@@ -184,12 +187,12 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         onPress={() => navigate("select_sighting_spot")}
         activeOpacity={0.7}
       />
-
       <Submit
         title="REGISTRAR AVISTAMENTO"
         onPress={handleSubmit(handleSubmitSighting)}
         activeOpacity={0.7}
       />
+      {loading && <LoadingBar color="#216C2E" />}
     </Container>
   );
 }

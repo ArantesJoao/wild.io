@@ -1,7 +1,10 @@
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
 import { MapContainer, Map, MarkerIcon } from "./style";
-import { useNavigation, ParamListBase } from "@react-navigation/native";
+import {
+  useNavigation,
+  ParamListBase
+} from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import {
@@ -40,10 +43,12 @@ const SelectSightingSpot: React.FC = () => {
       return;
     }
 
-    let location = await Location.getCurrentPositionAsync();
+    let location = await Location.getLastKnownPositionAsync();
     setMapRegion({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      latitude:
+        location != null ? location.coords.latitude : -27.597664753388656,
+      longitude:
+        location != null ? location.coords.longitude : -48.52063085134813,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     });

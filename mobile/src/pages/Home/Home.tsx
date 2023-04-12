@@ -49,10 +49,12 @@ export function Home() {
       return;
     }
 
-    let location = await Location.getCurrentPositionAsync();
+    let location = await Location.getLastKnownPositionAsync();
     setMapRegion({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      latitude:
+        location != null ? location.coords.latitude : -27.597664753388656,
+      longitude:
+        location != null ? location.coords.longitude : -48.52063085134813,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     });

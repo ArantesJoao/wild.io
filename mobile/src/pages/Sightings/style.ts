@@ -1,5 +1,5 @@
 import { theme } from "../../theme";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -12,4 +12,11 @@ export const Map = styled(MapView)`
   height: 85%;
 
   border-radius: 30px;
+`;
+
+export const PinPoint = styled(Marker)``;
+
+export const PinPointIcon = styled.Image`
+  width: 48px;
+  height: 59.94px; // keep icon proportion
 `;

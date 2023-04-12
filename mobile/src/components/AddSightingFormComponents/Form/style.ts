@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { LinearProgress } from "react-native-elements";
 import { theme } from "../../../theme";
 
 export const Container = styled.View`
@@ -40,4 +41,13 @@ export const InputAndInputError = styled.View`
 
 export const SpeciesError = styled.Text`
   margin-bottom: 0px;
+`;
+
+export const LoadingBar = styled(LinearProgress)`
+  color: ${theme.colors.loading_bar};
+
+  width: 95%;
+  align-self: center;
+
+  margin-top: 20px;
 `;
