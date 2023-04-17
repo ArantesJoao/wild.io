@@ -36,10 +36,6 @@ type FormData = {
   identifiedSpecies: boolean;
 };
 
-interface FormStates {
-  identifiedSpecies: boolean;
-}
-
 export interface RegisterData {
   species: string;
   description: string;

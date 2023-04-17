@@ -1,6 +1,18 @@
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
-import { Container, Map, PinPoint, PinPointIcon } from "./style";
+import {
+  Container,
+  Map,
+  PinPoint,
+  PinPointIcon,
+  CalloutContainer,
+  CalloutView,
+  CalloutTitle,
+  CalloutDescription,
+  NoPhotoIcon,
+  NoPhotoContainer,
+  ReportIcon,
+} from "./style";
 import { BackButton } from "../../components/BackButton";
 import {
   useNavigation,
@@ -10,7 +22,7 @@ import {
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { AddSighting } from "../../components/AddSighting";
-import { PROVIDER_GOOGLE } from "react-native-maps";
+import { Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
 import useSightings from "../../hooks/useSightings";
 
@@ -43,10 +55,34 @@ export function Sightings() {
         <PinPoint
           key={index}
           coordinate={sighting.location}
-          title={sighting.species}
-          description={sighting.description}
+          calloutAnchor={{
+            x: 0.5,
+            y: 0.1,
+          }}
         >
           <PinPointIcon source={require("../../assets/wildlife_marker.png")} />
+          <Callout tooltip>
+            <CalloutContainer>
+              <CalloutView>
+                {sighting.photo == null ? (
+                  <NoPhotoContainer>
+                    <NoPhotoIcon name="no-photography" size={64} />
+                  </NoPhotoContainer>
+                ) : (
+                  <CalloutTitle>Aqui vai ser a foto</CalloutTitle>
+                )}
+                {sighting.species == "" ? (
+                  <CalloutTitle>Espécie não identificada</CalloutTitle>
+                ) : (
+                  <CalloutTitle>{sighting.species}</CalloutTitle>
+                )}
+                <CalloutDescription numberOfLines={6}>
+                  {sighting.description}
+                </CalloutDescription>
+                <ReportIcon name="report" size={32} />
+              </CalloutView>
+            </CalloutContainer>
+          </Callout>
         </PinPoint>
       );
     });
