@@ -29,6 +29,9 @@ import {
 
 import useSightings, { Sighting } from "../../../hooks/useSightings";
 
+import { storage } from "../../../services/firebaseConfig";
+import * as FileSystem from "expo-file-system";
+
 type FormData = {
   species: string;
   description: string;
@@ -42,6 +45,30 @@ export interface RegisterData {
   location: LatLng;
   image: string;
   identifiedSpecies: boolean;
+}
+
+async function uploadImageAsync(
+  uri: string,
+  imageName: string
+): Promise<string> {
+  const blob: Blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      resolve(xhr.response);
+    };
+    xhr.onerror = function (e) {
+      reject(new TypeError("Network request failed"));
+    };
+    xhr.responseType = "blob";
+    xhr.open("GET", uri, true);
+    xhr.send(null);
+  });
+
+  const ref = storage.ref().child("images/" + imageName);
+  const snapshot = await ref.put(blob);
+
+  const downloadURL = await snapshot.ref.getDownloadURL();
+  return downloadURL;
 }
 
 const getSchema = (identifiedSpecies: boolean) =>
@@ -79,6 +106,12 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
 
     let sighting = {} as Sighting;
 
+    let imageUrl: string | null = null;
+    if (image) {
+      const imageName = `sighting-${Date.now()}.jpg`;
+      imageUrl = await uploadImageAsync(image, imageName);
+    }
+
     sighting.identified_species = identifiedSpecies;
 
     if (identifiedSpecies) {
@@ -94,7 +127,7 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
       longitude: coordinates.longitude,
     };
 
-    sighting.photo = image as string;
+    sighting.photo = imageUrl as string;
     sighting.date = new Date(Date.now());
 
     await saveSighting(sighting);

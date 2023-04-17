@@ -12,6 +12,7 @@ import {
   NoPhotoIcon,
   NoPhotoContainer,
   ReportIcon,
+  CalloutImage,
 } from "./style";
 import { BackButton } from "../../components/BackButton";
 import {
@@ -69,7 +70,11 @@ export function Sightings() {
                     <NoPhotoIcon name="no-photography" size={64} />
                   </NoPhotoContainer>
                 ) : (
-                  <CalloutTitle>Aqui vai ser a foto</CalloutTitle>
+                  <CalloutImage
+                    source={{
+                      uri: sighting.photo,
+                    }}
+                  />
                 )}
                 {sighting.species == "" ? (
                   <CalloutTitle>Espécie não identificada</CalloutTitle>

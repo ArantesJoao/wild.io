@@ -39,6 +39,11 @@ export const CalloutTitle = styled.Text`
   color: ${theme.colors.text};
 `;
 
+export const CalloutImage = styled.Image`
+  width: 100%;
+  height: 50%;
+`;
+
 export const CalloutDescription = styled.Text`
   font-family: ${theme.font_family.lato_regular};
   color: ${theme.colors.text};
