@@ -29,6 +29,23 @@ export default {
     }
   },
 
+  async getAllSightingsLast30Days(req: Request, res: Response) {
+    try {
+      const thirtyDaysAgo = new Date(
+        new Date().setDate(new Date().getDate() - 30)
+      );
+
+      const sightings = await Sighting.find({ date: { $gte: thirtyDaysAgo } });
+      res.json(sightings);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Erro desconhecido" });
+      }
+    }
+  },
+
   async getSightingById(req: Request, res: Response) {
     try {
       const sighting = await Sighting.findById(req.params.id);

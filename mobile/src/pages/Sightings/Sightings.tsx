@@ -65,7 +65,7 @@ export function Sightings() {
           <Callout tooltip>
             <CalloutContainer>
               <CalloutView>
-                {sighting.photo == null ? (
+                {sighting.photo == null || sighting.photo == "" ? (
                   <NoPhotoContainer>
                     <NoPhotoIcon name="no-photography" size={64} />
                   </NoPhotoContainer>
