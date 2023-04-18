@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const { Navigator, Screen } = createNativeStackNavigator();
 
 import { Home } from "../pages/Home/Home";
+import { Login } from "../pages/Login/Login";
 import { Loading } from "../pages/Loading/Loading";
 import { RegisterPark } from "../pages/RegisterPark";
 import { Sightings } from "../pages/Sightings/Sightings";
@@ -12,7 +13,8 @@ import SelectSightingSpot from "../pages/SelectSightingSpot/SelectSightingSpot";
 
 export function AppRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <Navigator initialRouteName="login" screenOptions={{ headerShown: false }}>
+      <Screen name="login" component={Login} />
       <Screen name="home" component={Home} />
       <Screen name="loading" component={Loading} />
       <Screen name="sightings" component={Sightings} />
