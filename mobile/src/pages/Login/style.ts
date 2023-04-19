@@ -41,14 +41,24 @@ export const Caption = styled.Text`
 export const WildIoText = styled.Text`
   font-family: ${theme.font_family.lato_title};
   color: ${theme.colors.logo};
-  font-size: 22px;
+  font-size: 28px;
+`;
+
+export const LoginButtonContent = styled.View`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
 `;
 
 export const LoginButton = styled.TouchableOpacity`
   padding: 5px;
 
   border: solid ${theme.colors.logo};
-  border-radius: 4;
+  border-radius: 4px;
+
+  margin-bottom: 10px;
 `;
 
 export const GoogleIcon = styled(AntDesign)`
@@ -59,5 +69,15 @@ export const GoogleIcon = styled(AntDesign)`
 export const LoginText = styled.Text`
   font-family: ${theme.font_family.lato_regular};
   color: ${theme.colors.logo};
-  
+  font-size: 24px;
 `;
+
+export const NoLoginText = styled.Text`
+  font-family: ${theme.font_family.lato_regular};
+  color: ${theme.colors.text};
+  font-size: 16px;
+
+  text-decoration: underline;
+`;
+
+export const NoLoginTouchable = styled.TouchableOpacity``;

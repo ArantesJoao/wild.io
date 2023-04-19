@@ -13,6 +13,7 @@ import {
 } from "@expo-google-fonts/montserrat";
 
 import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
+import { GlobalProvider } from "./globalContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,8 +30,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
-      <StatusBar style="auto" />
+      <GlobalProvider>
+        <Routes />
+        <StatusBar style="auto" />
+      </GlobalProvider>
     </ThemeProvider>
   );
 }

@@ -76,3 +76,10 @@ export const ReportIcon = styled(MaterialIcons)`
   bottom: 6px;
   right: 6px;
 `;
+
+export const ReportButton = styled.TouchableOpacity`
+  position: absolute;
+
+  bottom: 6px;
+  right: 6px;
+`;

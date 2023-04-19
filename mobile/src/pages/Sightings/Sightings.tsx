@@ -13,6 +13,7 @@ import {
   NoPhotoContainer,
   ReportIcon,
   CalloutImage,
+  ReportButton,
 } from "./style";
 import { BackButton } from "../../components/BackButton";
 import {
@@ -26,6 +27,9 @@ import { AddSighting } from "../../components/AddSighting";
 import { Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
 import useSightings from "../../hooks/useSightings";
+import { useGlobalContext } from "../../../globalContext";
+import InformLocationModal from "../../components/InformLocationModal";
+import { InformLocationContent } from "../../components/InformLocationContent";
 
 let mapStyle = customMap;
 
@@ -49,6 +53,19 @@ export function Sightings() {
     latitudeDelta: 0.1,
     longitudeDelta: 0.1,
   });
+
+  const { id, email, name } = useGlobalContext();
+
+  // Modal handling
+  const [informLocationModalVisible, setInformLocationModalVisible] =
+    useState(false);
+
+  function handleReport() {
+    console.log("bateu aqui");
+    if (id == "") {
+      setInformLocationModalVisible(true);
+    }
+  }
 
   const showSightings = () => {
     return sightings.map((sighting, index) => {
@@ -84,7 +101,9 @@ export function Sightings() {
                 <CalloutDescription numberOfLines={6}>
                   {sighting.description}
                 </CalloutDescription>
-                <ReportIcon name="report" size={32} />
+                <ReportButton onPress={handleReport}>
+                  <ReportIcon name="report" size={32} />
+                </ReportButton>
               </CalloutView>
             </CalloutContainer>
           </Callout>
@@ -123,6 +142,14 @@ export function Sightings() {
 
   return (
     <Container>
+      <InformLocationModal
+        visible={informLocationModalVisible}
+        onClose={() => {
+          setInformLocationModalVisible(false);
+        }}
+      >
+        <InformLocationContent info="Essa função é exclusiva para usuários logados!" />
+      </InformLocationModal>
       <Map
         provider={PROVIDER_GOOGLE}
         customMapStyle={mapStyle}

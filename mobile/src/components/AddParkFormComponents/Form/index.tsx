@@ -42,7 +42,6 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
     useState(false);
 
   async function handleSubmitPark(data: FormData) {
-    console.log(coordinates);
     if (coordinates == undefined) {
       setInformLocationModalVisible(true);
       return;

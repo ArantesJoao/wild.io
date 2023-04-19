@@ -1,5 +1,6 @@
 import MapView from "react-native-maps";
 import styled from "styled-components/native";
+import { MaterialIcons } from "@expo/vector-icons";
 import IconFontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { theme } from "../../theme";
@@ -16,6 +17,25 @@ export const Container = styled.View`
   padding: 10px 15px;
 
   background-color: ${theme.colors.background};
+`;
+
+export const ScreenHeader = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+
+  background-color: ${theme.colors.background};
+`;
+
+export const LogoutIcon = styled(MaterialIcons)`
+  color: ${theme.colors.warning_text};
+`;
+
+export const LogoutButton = styled.TouchableOpacity`
+  color: ${theme.colors.warning_text};
 `;
 
 export const Content = styled.View`

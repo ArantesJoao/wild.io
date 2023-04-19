@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import { PROVIDER_GOOGLE } from "react-native-maps";
@@ -14,13 +15,16 @@ import {
   NoLocationAccessWarning,
   NoLocationContainer,
   NoLocationText,
+  ScreenHeader,
+  LogoutIcon,
+  LogoutButton,
 } from "./style";
 
 import { customMap } from "../../utils/mapStyle";
 import parksIcon from "../../assets/parks.png";
 import wildLifeIcon from "../../assets/wildlife.png";
+import { useGlobalContext } from "../../../globalContext";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Platform, Text } from "react-native";
 import NoLocationAccessModal from "../../components/NoLocationAccessModal";
 import { NoAccessIOSTemplate } from "../../components/NoAccessIOSTemplate";
 import { NoAccessAndroidTemplate } from "../../components/NoAccessAndroidTemplate";
@@ -68,10 +72,29 @@ export function Home() {
     setNoAccessModalVisible(!noAccessModalVisible);
   }
 
+  const { name, setId, setName, setEmail } = useGlobalContext();
+
+  function handleLogout() {
+    setId("");
+    setName("");
+    setEmail("");
+  }
+
   return (
     <SafeView>
       <Container>
-        <Title>Olá, boa tarde!</Title>
+        {name != "" ? (
+          <ScreenHeader>
+            <Title>Olá, {name}!</Title>
+            <LogoutButton onPress={handleLogout}>
+              <LogoutIcon name="logout" size={28} />
+            </LogoutButton>
+          </ScreenHeader>
+        ) : (
+          <ScreenHeader>
+            <Title>Olá, seja bem-vindo!</Title>
+          </ScreenHeader>
+        )}
         <Content>
           <Map
             provider={PROVIDER_GOOGLE}
