@@ -6,6 +6,7 @@ export const Button = styled.TouchableOpacity`
   height: 165px;
 
   border-radius: 30px;
+  margin-bottom: 30px;
 
   background-color: ${theme.colors.surface_button};
 `;

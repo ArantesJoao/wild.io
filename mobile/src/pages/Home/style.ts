@@ -49,6 +49,7 @@ export const Content = styled.View`
 
 export const ButtonSection = styled.View`
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;

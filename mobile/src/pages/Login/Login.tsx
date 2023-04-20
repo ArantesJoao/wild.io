@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import {
   Caption,
@@ -21,7 +21,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import * as AuthSession from "expo-auth-session";
 import { useGlobalContext } from "../../../globalContext";
-import { TouchableOpacity } from "react-native";
 
 type AuthResponse = {
   params: {
@@ -34,7 +33,7 @@ export function Login() {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  const { setId, setName, setEmail } = useGlobalContext(); // Just so I can access this data in any screen
+  const { setIsUserLogged, setId, setName, setEmail } = useGlobalContext(); // Just so I can access this data in any screen
 
   async function handleGoogleSignIn() {
     try {
@@ -58,6 +57,7 @@ export function Login() {
         const user = await response.json();
 
         // Setting these data as global states
+        setIsUserLogged(true);
         setId(user.id);
         setName(user.given_name);
         setEmail(user.email);

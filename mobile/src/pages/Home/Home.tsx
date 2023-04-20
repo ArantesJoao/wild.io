@@ -72,9 +72,11 @@ export function Home() {
     setNoAccessModalVisible(!noAccessModalVisible);
   }
 
-  const { name, setId, setName, setEmail } = useGlobalContext();
+  const { name, isUserLogged, setIsUserLogged, setId, setName, setEmail } =
+    useGlobalContext();
 
   function handleLogout() {
+    setIsUserLogged(false);
     setId("");
     setName("");
     setEmail("");
@@ -83,7 +85,7 @@ export function Home() {
   return (
     <SafeView>
       <Container>
-        {name != "" ? (
+        {isUserLogged ? (
           <ScreenHeader>
             <Title>Olá, {name}!</Title>
             <LogoutButton onPress={handleLogout}>
@@ -131,14 +133,19 @@ export function Home() {
           )}
           <ButtonSection>
             <MainMenuButton
-              name="Registrar avistamento"
+              name="Visualizar avistamentos"
               icon={wildLifeIcon}
               onPress={() => navigate("sightings")}
             />
             <MainMenuButton
-              name="Visualizar parques mais próximos"
+              name="Visualizar parques "
               icon={parksIcon}
               onPress={() => navigate("nearest_parks")}
+            />
+            <MainMenuButton
+              name="Visualizar flora "
+              icon={parksIcon}
+              onPress={() => navigate("flora_sightings")}
             />
           </ButtonSection>
         </Content>

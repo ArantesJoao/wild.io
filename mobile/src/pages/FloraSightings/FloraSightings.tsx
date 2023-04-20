@@ -21,31 +21,32 @@ import {
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { AddSighting } from "../../components/AddSighting";
+import { AddFlora } from "../../components/AddFlora";
 import { Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
-import useSightings from "../../hooks/useSightings";
+// import useFlora from "../../hooks/useFlora";
 import { useGlobalContext } from "../../../globalContext";
 import InformLocationModal from "../../components/InformLocationModal";
 import { InformLocationContent } from "../../components/InformLocationContent";
+import useFlora from "../../hooks/useFlora";
 
 let mapStyle = customMap;
 
-export function Sightings() {
+export function FloraSightings() {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  const { sightings, fetchSightings, loading, error } = useSightings();
+  const { floraSightings, fetchFlora, loading, error } = useFlora();
 
   const { isUserLogged } = useGlobalContext();
 
   useFocusEffect(
     React.useCallback(() => {
-      fetchSightings();
+      fetchFlora();
     }, [])
   );
 
-  const [sightingModalVisible, setSightingModalVisible] = useState(false);
+  const [floraModalVisible, setFloraModalVisible] = useState(false);
 
   const [mapRegion, setMapRegion] = useState({
     latitude: -27.597664753388656,
@@ -57,12 +58,12 @@ export function Sightings() {
   // Modal handling
   const [necessaryLoginModalInfo, setNecessaryLoginModalInfo] = useState(false);
 
-  const showSightings = () => {
-    return sightings.map((sighting, index) => {
+  const showFlora = () => {
+    return floraSightings.map((flora: any, index: any) => {
       return (
         <PinPoint
           key={index}
-          coordinate={sighting.location}
+          coordinate={flora.location}
           calloutAnchor={{
             x: 0.5,
             y: 0.1,
@@ -72,24 +73,24 @@ export function Sightings() {
           <Callout tooltip>
             <CalloutContainer>
               <CalloutView>
-                {sighting.photo == null || sighting.photo == "" ? (
+                {flora.photo == null || flora.photo == "" ? (
                   <NoPhotoContainer>
                     <NoPhotoIcon name="no-photography" size={64} />
                   </NoPhotoContainer>
                 ) : (
                   <CalloutImage
                     source={{
-                      uri: sighting.photo,
+                      uri: flora.photo,
                     }}
                   />
                 )}
-                {sighting.species == "" ? (
+                {flora.species == "" ? (
                   <CalloutTitle>Espécie não identificada</CalloutTitle>
                 ) : (
-                  <CalloutTitle>{sighting.species}</CalloutTitle>
+                  <CalloutTitle>{flora.species}</CalloutTitle>
                 )}
                 <CalloutDescription numberOfLines={6}>
-                  {sighting.description}
+                  {flora.description}
                 </CalloutDescription>
               </CalloutView>
             </CalloutContainer>
@@ -123,9 +124,9 @@ export function Sightings() {
     currentUserLocation();
   }, []);
 
-  function handleAddSighting() {
+  function handleAddFlora() {
     if (isUserLogged) {
-      navigate("register_sighting");
+      navigate("register_flora");
     } else {
       setNecessaryLoginModalInfo(true);
     }
@@ -147,9 +148,9 @@ export function Sightings() {
         region={mapRegion}
         showsUserLocation={true}
       >
-        {showSightings()}
+        {showFlora()}
       </Map>
-      <AddSighting onPress={handleAddSighting} activeOpacity={0.7} />
+      <AddFlora onPress={handleAddFlora} activeOpacity={0.7} />
       <BackButton onPress={() => navigate("home")} />
     </Container>
   );
