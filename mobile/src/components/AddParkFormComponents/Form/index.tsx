@@ -18,6 +18,8 @@ import { LatLng } from "react-native-maps";
 import { InformLocationContent } from "../../InformLocationContent";
 import useParks, { Park } from "../../../hooks/useParks";
 import { LoadingBar } from "../../AddSightingFormComponents/Form/style";
+import { useGlobalContext } from "../../../../globalContext";
+import { User } from "../../../hooks/useSightings";
 
 type FormData = {
   name: string;
@@ -37,22 +39,27 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const { savePark, loading, error } = useParks();
+  const { name, email, id } = useGlobalContext();
 
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
 
   async function handleSubmitPark(data: FormData) {
-    if (coordinates == undefined) {
+    if (!coordinates) {
       setInformLocationModalVisible(true);
       return;
     }
 
-    let park = {} as Park;
-    park.name = data.name;
-    park.description = data.description;
-    park.location = {
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
+    const currentLoggedUser: User = { name, email, google_id: id };
+
+    const park: Park = {
+      name: data.name,
+      description: data.description,
+      location: {
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
+      user: currentLoggedUser,
     };
 
     await savePark(park);

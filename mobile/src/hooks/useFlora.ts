@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import { User } from "./useSightings";
 
 export interface Flora {
   identified_species: boolean;
@@ -11,6 +12,7 @@ export interface Flora {
   };
   date: Date;
   photo?: string;
+  user: User;
 }
 
 const useFlora = () => {

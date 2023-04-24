@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import { User } from "./useSightings";
 
 export interface Park {
   name: string;
@@ -8,6 +9,7 @@ export interface Park {
     latitude: number;
     longitude: number;
   };
+  user: User;
 }
 
 const useParks = () => {

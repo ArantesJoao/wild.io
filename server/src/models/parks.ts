@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { User } from "./flora";
 
 export interface ILocation {
   latitude: Number;
@@ -9,6 +10,7 @@ interface ParkDocument extends mongoose.Document {
   name: string;
   description: string;
   location: ILocation;
+  User: User;
 }
 
 const parkSchema = new mongoose.Schema({
@@ -29,6 +31,11 @@ const parkSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
+  },
+  user: {
+    name: String,
+    email: String,
+    google_id: String,
   },
 });
 

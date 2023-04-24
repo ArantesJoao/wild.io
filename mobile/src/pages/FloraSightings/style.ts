@@ -39,9 +39,24 @@ export const CalloutTitle = styled.Text`
   color: ${theme.colors.text};
 `;
 
+export const CalloutImageContainer = styled.View`
+  height: 150px;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${theme.colors.background_photo_button};
+  border-radius: 5px;
+`;
+
 export const CalloutImage = styled.Image`
   width: 100%;
-  height: 50%;
+  height: 100%;
+
+  border-radius: 5px;
 `;
 
 export const CalloutDescription = styled.Text`

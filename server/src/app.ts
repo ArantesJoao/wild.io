@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use("/api/sightings", sightingsRouter);
 app.use("/api/parks", parksRouter);
-app.use("/api/FLORA", floraRouter);
+app.use("/api/flora", floraRouter);
 app.use(errorHandlingMiddleware);
 
 export default app;

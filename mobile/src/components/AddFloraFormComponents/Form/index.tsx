@@ -30,7 +30,8 @@ import {
 import useFlora, { Flora } from "../../../hooks/useFlora";
 
 import { storage } from "../../../services/firebaseConfig";
-import * as FileSystem from "expo-file-system";
+import { useGlobalContext } from "../../../../globalContext";
+import { User } from "../../../hooks/useSightings";
 
 type FormData = {
   species: string;
@@ -57,7 +58,7 @@ async function uploadImageAsync(
       resolve(xhr.response);
     };
     xhr.onerror = function (e) {
-      reject(new TypeError("Network request failed"));
+      reject(new TypeError("Erro na requisição da rede"));
     };
     xhr.responseType = "blob";
     xhr.open("GET", uri, true);
@@ -90,45 +91,36 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
   const { saveFlora, loading, error } = useFlora();
   const [image, setImage] = useState<string | null>(null);
   const [identifiedSpecies, setIdentifiedSpecies] = useState(false);
+  const { name, email, id } = useGlobalContext();
 
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
 
   async function handleSubmitFloraSighting(data: FormData) {
-    if (coordinates == undefined) {
+    if (!coordinates) {
       setInformLocationModalVisible(true);
       return;
     }
 
-    if (data.identifiedSpecies && data.species == "") {
-      return;
-    }
+    if (data.identifiedSpecies && data.species == "") return;
 
-    let flora_sighting = {} as Flora;
+    const currentLoggedUser: User = { name, email, google_id: id };
+    const imageUrl = image
+      ? await uploadImageAsync(image, `flora-${Date.now()}.jpg`)
+      : null;
 
-    let imageUrl: string | null = null;
-    if (image) {
-      const imageName = `flora-${Date.now()}.jpg`;
-      imageUrl = await uploadImageAsync(image, imageName);
-    }
-
-    flora_sighting.identified_species = identifiedSpecies;
-
-    if (identifiedSpecies) {
-      flora_sighting.species = data.species;
-    } else {
-      flora_sighting.species = "";
-    }
-
-    flora_sighting.description = data.description;
-
-    flora_sighting.location = {
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
+    const flora_sighting: Flora = {
+      identified_species: identifiedSpecies,
+      species: identifiedSpecies ? data.species : "",
+      description: data.description,
+      location: {
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
+      user: currentLoggedUser,
+      photo: imageUrl as string,
+      date: new Date(),
     };
-
-    flora_sighting.photo = imageUrl as string;
-    flora_sighting.date = new Date(Date.now());
 
     await saveFlora(flora_sighting);
     navigate("flora_sightings");

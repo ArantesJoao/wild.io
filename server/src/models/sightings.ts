@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ILocation } from "./parks";
+import { User } from "./flora";
 
 interface SightingDocument extends mongoose.Document {
   identified_species: boolean;
@@ -8,6 +9,7 @@ interface SightingDocument extends mongoose.Document {
   location: ILocation;
   date: Date;
   photo?: string;
+  User: User;
 }
 
 const sightingSchema = new mongoose.Schema({
@@ -42,6 +44,11 @@ const sightingSchema = new mongoose.Schema({
   photo: {
     type: String,
     required: false,
+  },
+  user: {
+    name: String,
+    email: String,
+    google_id: String,
   },
 });
 

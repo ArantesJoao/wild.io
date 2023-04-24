@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 import { ILocation } from "./parks";
 
+export interface User {
+  name: String;
+  email: String;
+  google_id: String;
+}
+
 interface FloraDocument extends mongoose.Document {
   identified_species: boolean;
   species?: string;
@@ -8,6 +14,7 @@ interface FloraDocument extends mongoose.Document {
   location: ILocation;
   date: Date;
   photo?: string;
+  User: User;
 }
 
 const floraSchema = new mongoose.Schema({
@@ -42,6 +49,11 @@ const floraSchema = new mongoose.Schema({
   photo: {
     type: String,
     required: false,
+  },
+  user: {
+    name: String,
+    email: String,
+    google_id: String,
   },
 });
 

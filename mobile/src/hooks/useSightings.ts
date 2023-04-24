@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
 
+export interface User {
+  name: String;
+  email: String;
+  google_id: String;
+}
+
 export interface Sighting {
   identified_species: boolean;
   species?: string;
@@ -11,6 +17,7 @@ export interface Sighting {
   };
   date: Date;
   photo?: string;
+  user: User;
 }
 
 const useSightings = () => {

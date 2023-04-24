@@ -27,10 +27,10 @@ import {
   LoadingBar,
 } from "./style";
 
-import useSightings, { Sighting } from "../../../hooks/useSightings";
+import useSightings, { Sighting, User } from "../../../hooks/useSightings";
 
 import { storage } from "../../../services/firebaseConfig";
-import * as FileSystem from "expo-file-system";
+import { useGlobalContext } from "../../../../globalContext";
 
 type FormData = {
   species: string;
@@ -90,6 +90,7 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
   const { saveSighting, loading, error } = useSightings();
   const [image, setImage] = useState<string | null>(null);
   const [identifiedSpecies, setIdentifiedSpecies] = useState(false);
+  const { name, email, id } = useGlobalContext();
 
   const [informLocationModalVisible, setInformLocationModalVisible] =
     useState(false);
@@ -104,31 +105,24 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
       return;
     }
 
-    let sighting = {} as Sighting;
+    let currentLoggedUser: User = { name, email, google_id: id };
 
-    let imageUrl: string | null = null;
-    if (image) {
-      const imageName = `sighting-${Date.now()}.jpg`;
-      imageUrl = await uploadImageAsync(image, imageName);
-    }
+    const imageUrl = image
+      ? await uploadImageAsync(image, `sighting-${Date.now()}.jpg`)
+      : null;
 
-    sighting.identified_species = identifiedSpecies;
-
-    if (identifiedSpecies) {
-      sighting.species = data.species;
-    } else {
-      sighting.species = "";
-    }
-
-    sighting.description = data.description;
-
-    sighting.location = {
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
+    const sighting: Sighting = {
+      identified_species: identifiedSpecies,
+      species: identifiedSpecies ? data.species : "",
+      description: data.description,
+      location: {
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
+      photo: imageUrl as string,
+      date: new Date(Date.now()),
+      user: currentLoggedUser,
     };
-
-    sighting.photo = imageUrl as string;
-    sighting.date = new Date(Date.now());
 
     await saveSighting(sighting);
     navigate("sightings");

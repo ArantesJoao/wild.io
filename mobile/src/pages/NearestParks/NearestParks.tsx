@@ -2,7 +2,8 @@ import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
 import { PROVIDER_GOOGLE } from "react-native-maps";
 import { BackButton } from "../../components/BackButton";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import InformLocationModal from "../../components/InformLocationModal";
+import { InformLocationContent } from "../../components/InformLocationContent";
 import {
   useNavigation,
   ParamListBase,
@@ -14,6 +15,7 @@ import { customMap } from "../../utils/mapStyle";
 import { Container, Content, Map, PinPoint, PinPointIcon } from "./style";
 import { AddPark } from "../../components/AddPark";
 import useParks from "../../hooks/useParks";
+import { useGlobalContext } from "../../../globalContext";
 
 let mapStyle = customMap;
 
@@ -21,7 +23,11 @@ export function NearestParks() {
   const { navigate } =
     useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-  const { parks, fetchParks, loading, error } = useParks();
+  const { parks, fetchParks } = useParks();
+  const { isUserLogged } = useGlobalContext();
+
+  // Modal handling
+  const [necessaryLoginModalInfo, setNecessaryLoginModalInfo] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -74,8 +80,24 @@ export function NearestParks() {
     currentUserLocation();
   }, []);
 
+  function handleAddPark() {
+    if (isUserLogged) {
+      navigate("register_flora");
+    } else {
+      setNecessaryLoginModalInfo(true);
+    }
+  }
+
   return (
     <Container>
+      <InformLocationModal
+        visible={necessaryLoginModalInfo}
+        onClose={() => {
+          setNecessaryLoginModalInfo(false);
+        }}
+      >
+        <InformLocationContent info="Essa função é exclusiva para usuários logados!" />
+      </InformLocationModal>
       <Content>
         <Map
           provider={PROVIDER_GOOGLE}
@@ -85,7 +107,7 @@ export function NearestParks() {
         >
           {showParks()}
         </Map>
-        <AddPark onPress={() => navigate("register_park")} />
+        <AddPark onPress={handleAddPark} />
         <BackButton onPress={() => navigate("home")} />
       </Content>
     </Container>

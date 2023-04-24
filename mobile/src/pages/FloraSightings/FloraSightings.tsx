@@ -12,6 +12,7 @@ import {
   NoPhotoIcon,
   NoPhotoContainer,
   CalloutImage,
+  CalloutImageContainer,
 } from "./style";
 import { BackButton } from "../../components/BackButton";
 import {
@@ -24,7 +25,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AddFlora } from "../../components/AddFlora";
 import { Callout, PROVIDER_GOOGLE } from "react-native-maps";
 import { customMap } from "../../utils/mapStyle";
-// import useFlora from "../../hooks/useFlora";
 import { useGlobalContext } from "../../../globalContext";
 import InformLocationModal from "../../components/InformLocationModal";
 import { InformLocationContent } from "../../components/InformLocationContent";
@@ -78,11 +78,13 @@ export function FloraSightings() {
                     <NoPhotoIcon name="no-photography" size={64} />
                   </NoPhotoContainer>
                 ) : (
-                  <CalloutImage
-                    source={{
-                      uri: flora.photo,
-                    }}
-                  />
+                  <CalloutImageContainer>
+                    <CalloutImage
+                      source={{
+                        uri: flora.photo,
+                      }}
+                    />
+                  </CalloutImageContainer>
                 )}
                 {flora.species == "" ? (
                   <CalloutTitle>Espécie não identificada</CalloutTitle>
