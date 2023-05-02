@@ -82,7 +82,7 @@ export function NearestParks() {
 
   function handleAddPark() {
     if (isUserLogged) {
-      navigate("register_flora");
+      navigate("register_park");
     } else {
       setNecessaryLoginModalInfo(true);
     }

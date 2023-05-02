@@ -69,7 +69,7 @@ export function FloraSightings() {
             y: 0.1,
           }}
         >
-          <PinPointIcon source={require("../../assets/wildlife_marker.png")} />
+          <PinPointIcon source={require("../../assets/flora_marker.png")} />
           <Callout tooltip>
             <CalloutContainer>
               <CalloutView>

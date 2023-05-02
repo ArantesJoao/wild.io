@@ -58,7 +58,7 @@ export const ButtonSection = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 32px;
+  font-size: 28px;
   font-family: ${theme.font_family.regular};
 `;
 

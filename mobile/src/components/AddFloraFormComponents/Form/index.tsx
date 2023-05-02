@@ -198,7 +198,7 @@ export function Form({ coordinates }: RegisterEntityRouteParams) {
         control={control}
         name="description"
         placeholder={
-          "Como é o animal que foi avistado? Busque descrever dados relevantes para identificar o animal, como tamanho, tipo de pele, coloração, presença de cauda ou asas etc."
+          "Como é a flora que foi avistada? Busque descrever dados relevantes para identificar a planta, como tamanho, tipo de folhagem, coloração, presença de flores ou frutos, entre outros"
         }
         error={errors.description}
         multiline

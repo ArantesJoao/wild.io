@@ -133,7 +133,7 @@ export function Home() {
           )}
           <ButtonSection>
             <MainMenuButton
-              name="Visualizar avistamentos"
+              name={"Visualizar\navistamentos"}
               icon={wildLifeIcon}
               onPress={() => navigate("sightings")}
             />
