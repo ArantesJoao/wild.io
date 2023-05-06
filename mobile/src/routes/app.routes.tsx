@@ -3,6 +3,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 import { Home } from "../pages/Home/Home";
 import { Login } from "../pages/Login/Login";
+import { About } from "../pages/About/About";
 import { Loading } from "../pages/Loading/Loading";
 import { RegisterPark } from "../pages/RegisterPark";
 import { RegisterFlora } from "../pages/RegisterFlora";
@@ -19,6 +20,7 @@ export function AppRoutes() {
     <Navigator initialRouteName="login" screenOptions={{ headerShown: false }}>
       <Screen name="login" component={Login} />
       <Screen name="home" component={Home} />
+      <Screen name="about" component={About} />
       <Screen name="loading" component={Loading} />
 
       {/* Rotas de avistamentos */}

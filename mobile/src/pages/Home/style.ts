@@ -24,6 +24,7 @@ export const ScreenHeader = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 7%;
 
   padding: 10px;
 
@@ -42,7 +43,7 @@ export const Content = styled.View`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 100%;
+  height: 93%;
 
   margin-top: 6px;
 `;
@@ -91,4 +92,16 @@ export const Map = styled(MapView)`
   height: 20%;
 
   border-radius: 20px;
+`;
+
+export const AboutButtonContainer = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 5;
+  right: 5;
+`;
+
+export const AboutButton = styled(MaterialIcons)`
+  color: ${theme.colors.logo};
+  font-size: 40px;
+  margin-right: 7px;
 `;

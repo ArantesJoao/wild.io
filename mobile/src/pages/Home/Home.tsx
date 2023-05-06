@@ -18,6 +18,8 @@ import {
   ScreenHeader,
   LogoutIcon,
   LogoutButton,
+  AboutButton,
+  AboutButtonContainer,
 } from "./style";
 
 import { customMap } from "../../utils/mapStyle";
@@ -148,6 +150,9 @@ export function Home() {
               onPress={() => navigate("flora_sightings")}
             />
           </ButtonSection>
+          <AboutButtonContainer onPress={() => navigate("about")}>
+            <AboutButton name="info-outline" />
+          </AboutButtonContainer>
         </Content>
       </Container>
     </SafeView>
