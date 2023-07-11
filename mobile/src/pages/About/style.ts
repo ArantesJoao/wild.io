@@ -31,14 +31,14 @@ export const WarningText = styled.Text`
   text-align: center;
   font-family: ${theme.font_family.lato_regular};
   font-size: 18em;
-  color = ${theme.colors.text};
-`;
+  color: ${theme.colors.text};
+`
 
 export const BoldWarningText = styled.Text`
   font-family: ${theme.font_family.lato_title};
   font-size: 18em;
-  color = ${theme.colors.text};
-`;
+  color: ${theme.colors.text};
+`
 
 export const WarningIcon = styled(MaterialIcons)`
   color: ${theme.colors.warning_text};
@@ -46,20 +46,20 @@ export const WarningIcon = styled(MaterialIcons)`
   margin-right: 7px;
 
   margin-bottom: 5%;
-`;
+`
 
 export const Title = styled.Text`
   font-family: ${theme.font_family.lato_title};
   font-size: 20em;
-  color = ${theme.colors.text};
-`;
+  color: ${theme.colors.text};
+`
 
 export const InformationalText = styled.Text`
   font-family: ${theme.font_family.lato_regular};
   font-size: 18em;
-  color = ${theme.colors.text};
+  color: ${theme.colors.text};
   padding: 3% 6%;
   text-align: justify;
 
-  margin-bottom: 22%
-`;
+  margin-bottom: 22%;
+`

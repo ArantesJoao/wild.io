@@ -37,7 +37,7 @@ export function RegisterFlora() {
         </>
         <BackButton
           style={{ height: "8%", marginLeft: "2%" }} // inline styled because this was a specific change for this screen
-          onPress={() => navigate("sightings")}
+          onPress={() => navigate("flora_sightings")}
         />
       </Container>
     </TouchableWithoutFeedback>

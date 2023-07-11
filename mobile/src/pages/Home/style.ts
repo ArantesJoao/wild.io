@@ -96,8 +96,8 @@ export const Map = styled(MapView)`
 
 export const AboutButtonContainer = styled.TouchableOpacity`
   position: absolute;
-  bottom: 5;
-  right: 5;
+  bottom: 5px;
+  right: 5px;
 `;
 
 export const AboutButton = styled(MaterialIcons)`
