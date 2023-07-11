@@ -1,6 +1,6 @@
 # Wild.io
 
-![App Preview](.github/wild-io-banner)
+![App Preview](.github/wild-io-banner.png)
 
 ## Introduction
 
