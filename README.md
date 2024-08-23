@@ -34,7 +34,7 @@ To run this project locally, you'll need to have Node.js, npm and Expo CLI insta
 
 1. Clone this repository and navigate into it:
 ```bash
-git clone https://github.com/ArantesJoao/wild-io.git
+git clone https://github.com/ArantesJoao/wild.io.git
 cd wild-io
 ```
 
